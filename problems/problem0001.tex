@@ -1,0 +1,63 @@
+% --- problems/problem0001.tex ---
+
+A resolução do problema consiste em encontrar a soma de todos os números naturais abaixo de 1000 que são múltiplos de 3 ou 5.
+
+\subsection*{Enunciado Oficial (Inglês)}
+\begin{quote}
+If we list all natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6, and 9. The sum of these multiples is 23.
+Find the sum of all multiples of 3 or 5 below 1000.
+\end{quote}
+
+\subsection*{Enunciado do Problema (Português)}
+\begin{quote}
+Se listarmos todos os números naturais abaixo de 10 que são múltiplos de 3 ou 5, obtemos 3, 5, 6 e 9. A soma desses múltiplos é 23.
+Encontre a soma de todos os múltiplos de 3 ou 5 menores que 1000.
+\end{quote}
+
+
+
+\subsection*{Abordagem Matemática}
+
+Para encontrar a soma de todos os números naturais abaixo de 1000 que são múltiplos de 3 ou 5, precisamos de um método que evite contar os números duas vezes.
+
+O Princípio da Inclusão-Exclusão é perfeitamente adequado para esta tarefa.
+Ele dita que somamos os múltiplos de 3, adicionamos a soma dos múltiplos de 5 e, em seguida, subtraímos a soma dos números que são múltiplos de ambos (ou seja, múltiplos de $3 \times 5 = 15$).
+
+Isso pode ser expresso de forma concisa como:
+\[
+\sum_3 + \sum_5 - \sum_{15}
+\]
+Neste contexto, $\sum_3$, $\sum_5$ e $\sum_{15}$ representam, respectivamente, a soma de todos os múltiplos de 3, de 5 e de 15, que são estritamente menores que 1000.
+
+Para calcular cada uma dessas somas individuais ($\sum_x$), usamos a conhecida fórmula para a soma de uma progressão aritmética.
+Especificamente, a soma dos múltiplos de um número $x$ até um certo limite $n$ é dada por:
+\[
+x \cdot \frac{m(m + 1)}{2}, \quad \text{onde } m = \left\lfloor \frac{n}{x} \right\rfloor
+\]
+Aqui, $m$ é a contagem de quantos múltiplos de $x$ existem até $n$.
+
+Para este problema, estamos interessados apenas nos números que estão abaixo de 1000. Isso significa que o maior número que consideramos em nossas somas é $n=999$. Aplicando isso à nossa fórmula para cada componente:
+\[
+\text{Soma} = 3 \cdot \frac{333 \cdot 334}{2} + 5 \cdot \frac{199 \cdot 200}{2} - 15 \cdot \frac{66 \cdot 67}{2} = \boxed{233168}
+\]
+Este cálculo resulta na soma total de todos os números naturais únicos abaixo de 1000 que são múltiplos de 3 ou 5.
+
+
+
+\subsection*{Código Python}
+O código Python a seguir itera pelos números abaixo de 1000 e soma aqueles divisíveis por 3 ou 5.
+\begin{lstlisting}[caption=Solução do Problema 1 em Python, language=Python]
+limit = 1000
+total_sum = 0
+for n in range(1, limit):
+....if n % 3 == 0 or n % 5 == 0:
+........total_sum += n
+# print(total_sum)
+\end{lstlisting}
+
+
+
+\subsection*{Resposta}
+A soma de todos os múltiplos de 3 ou 5 abaixo de 1000 é $\mathbf{233168}$.
+
+\newpage
